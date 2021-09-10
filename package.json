@@ -1,0 +1,39 @@
+{
+  "name": "orange-dragonfly-web-server",
+  "version": "0.1.0",
+  "description": "Orange.Dragofly.WebServer - wrapper for NodeJS web server. Component of future Orange.Dragonfly framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "example": "node example/run-server.js",
+    "build": "npx webpack",
+    "lint": "eslint ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charger88/orange-dragonfly-web-server.git"
+  },
+  "keywords": [
+    "web application",
+    "server"
+  ],
+  "author": {
+    "name": "Michael Kelner",
+    "email": "mikhail.kelner@gmail.com",
+    "url": "https://www.michaelkelner.com/"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charger88/orange-smart-time/issues"
+  },
+  "homepage": "https://github.com/charger88/orange-smart-time#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "jest": "^27.0.6"
+  },
+  "dependencies": {}
+}
