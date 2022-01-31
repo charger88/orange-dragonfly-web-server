@@ -11,9 +11,10 @@ class OrangeDragonflyWebServer {
    * @param {number} port Port
    * @param {?function} errorHandler callback for system errors
    */
-  constructor (port = 8888, errorHandler = null) {
+  constructor (port = 8888, errorHandler = null, host = '0.0.0.0') {
     this._server = null
     this.port = port
+    this.host = host
     this.errorHandler = errorHandler
   }
 
@@ -54,6 +55,24 @@ class OrangeDragonflyWebServer {
   }
 
   /**
+   * Host
+   *
+   * @param {string} host
+   */
+  set host (host) {
+    this._host = host
+  }
+
+  /**
+   * Host
+   *
+   * @return {string}
+   */
+  get host () {
+    return this._host
+  }
+
+  /**
    * Start server
    *
    * @param {function} handler Application requests handler
@@ -72,7 +91,7 @@ class OrangeDragonflyWebServer {
         request.on('end', () => {
           let req = null
           try {
-            req = new OrangeDragonflyRequest(request.method, request.url, request.headers, body)
+            req = new OrangeDragonflyRequest(request.method, request.url, request.headers, body, request.socket.remoteAddress)
             handler(req).then(res => res.send(response))
           } catch (e) {
             console.error(e)
@@ -85,7 +104,7 @@ class OrangeDragonflyWebServer {
           }
         })
       })
-      this._server.listen(this.port, () => {
+      this._server.listen(this.port, this.host, () => {
         resolve(true)
       })
     })

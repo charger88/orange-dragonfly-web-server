@@ -8,11 +8,13 @@ class OrangeDragonflyRequest {
    * @param {string} url URL (path, query)
    * @param {object} headers Headers
    * @param {string} body Body of HTTP request
+   * @param {string} ip IP address of HTTP client
    */
-  constructor (method, url, headers = {}, body = '') {
+  constructor (method, url, headers = {}, body = '', ip = '0.0.0.0') {
     this.method = method
     this.url = url
     this.headers = headers
+    this.ip = ip
     this._u = new URL(`http://${this.getHeader('host', 'localhost')}${this.url}`)
     this._query = null
     this._rawBody = body
