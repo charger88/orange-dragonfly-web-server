@@ -53,6 +53,15 @@ test('query', () => {
   expect(req.getQueryParam('c')).toBe('string')
 })
 
+test('query - parameter as array', () => {
+  const req = new OrangeDragonflyRequest('GET', '/framework/123/dragonfly/orange?arr[]=2&arr[]=3&arr[]=4', {})
+  expect(req.path).toBe('/framework/123/dragonfly/orange')
+  expect(req.query).toEqual({
+    arr: [2, 3, 4]
+  })
+  expect(req.getQueryParam('arr')).toEqual([2, 3, 4])
+})
+
 test('content type', () => {
   const regular = new OrangeDragonflyRequest('GET', '/', { 'content-type': 'application/json' })
   expect(regular.contentType).toBe('application/json')

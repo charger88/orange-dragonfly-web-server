@@ -129,16 +129,23 @@ class OrangeDragonflyRequest {
       const [p, v] = c
       const pn = p.match(/(.+)\[(.*)]/)
       if (pn) {
-        if (!q[pn[1]]) {
-          q[pn[1]] = {}
-        }
         if (pn[2] && ['"', "'"].includes(pn[2].slice(0, 1))) {
           pn[2] = pn[2].slice(1)
         }
         if (pn[2] && ['"', "'"].includes(pn[2].slice(-1))) {
           pn[2] = pn[2].slice(0, -1)
         }
-        q[pn[1]][pn[2] ? pn[2] : Object.keys(q[pn[1]]).length] = v
+        if (!q[pn[1]]) {
+          q[pn[1]] = []
+        }
+        if (pn[2].length && Array.isArray(q[pn[1]])) {
+          q[pn[1]] = { ...q[pn[1]] }
+        }
+        if (Array.isArray(q[pn[1]])) {
+          q[pn[1]].push(v)
+        } else {
+          q[pn[1]][pn[2].length ? pn[2] : Object.keys(q[pn[1]]).length] = v
+        }
       } else {
         q[p] = v
       }
